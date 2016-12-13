@@ -2,6 +2,7 @@ package com.example.realm.realmdemo.repository;
 
 import com.example.realm.realmdemo.model.Apartment;
 import com.example.realm.realmdemo.model.Location;
+import com.example.realm.realmdemo.model.Owner;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -20,9 +21,15 @@ public class Repository {
       public void execute(Realm realm) {
         Location location = realm.createObject(Location.class);
         location.name = "Hermes Heritage";
+
+        Owner owner = realm.createObject(Owner.class);
+        owner.name = "Nazneen R";
+
         Apartment apartment = realm.createObject(Apartment.class);
         apartment.setLocation(location);
         apartment.setRentValue(rentValue);
+        apartment.setOwner(owner);
+        apartment.setCompleteAddress("Opp. Binaruis Building, Pune-411006 ");
       }
     });
   }
@@ -33,9 +40,6 @@ public class Repository {
     realm.executeTransaction(new Realm.Transaction() {
       @Override
       public void execute(Realm realm) {
-        Location location = realm.createObject(Location.class);
-        location.name = "Hermes Heritage";
-        apartment.setLocation(location);
         apartment.setRentValue(8000);
       }
     });
