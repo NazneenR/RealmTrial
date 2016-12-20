@@ -1,8 +1,16 @@
 package com.example.realm.realmdemo.model;
 
+import java.util.UUID;
+
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Apartment extends RealmObject {
+
+  @PrimaryKey
+  private String uuid;
+  private String completeAddress;
+  private Owner owner;
   private Location location;
   private int rentValue;
 
@@ -22,9 +30,6 @@ public class Apartment extends RealmObject {
     this.owner = owner;
   }
 
-  private String completeAddress;
-  private Owner owner;
-
   public Location getLocation() {
     return location;
   }
@@ -39,5 +44,12 @@ public class Apartment extends RealmObject {
 
   public void setRentValue(int rentValue) {
     this.rentValue = rentValue;
+  }
+
+  public void setUuid(String uuid) {
+    this.uuid = uuid;
+  }
+  public String getUuid() {
+    return uuid;
   }
 }

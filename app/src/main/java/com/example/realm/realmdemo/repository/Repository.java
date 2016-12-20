@@ -4,6 +4,8 @@ import com.example.realm.realmdemo.model.Apartment;
 import com.example.realm.realmdemo.model.Location;
 import com.example.realm.realmdemo.model.Owner;
 
+import java.util.UUID;
+
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -16,42 +18,35 @@ public class Repository {
   }
 
   public void addApartmentWithRent(final int rentValue) {
-    realm.executeTransaction(new Realm.Transaction() {
-      @Override
-      public void execute(Realm realm) {
-        Location location = realm.createObject(Location.class);
-        location.name = "Hermes Heritage";
+    realm.beginTransaction();
+    Location location = new Location();
+    location.name = "Hermes Heritage";
+    Owner owner = new Owner();
+    owner.name = "Nazneen R";
 
-        Owner owner = realm.createObject(Owner.class);
-        owner.name = "Nazneen R";
+    Apartment apartment = new Apartment();
+    apartment.setUuid(UUID.randomUUID().toString());
+    apartment.setLocation(location);
+    apartment.setRentValue(rentValue);
+    apartment.setOwner(owner);
+    apartment.setCompleteAddress("Opp. Binaruis Building, Pune-411006 ");
 
-        Apartment apartment = realm.createObject(Apartment.class);
-        apartment.setLocation(location);
-        apartment.setRentValue(rentValue);
-        apartment.setOwner(owner);
-        apartment.setCompleteAddress("Opp. Binaruis Building, Pune-411006 ");
-      }
-    });
+    realm.copyToRealmOrUpdate(apartment);
+    realm.commitTransaction();
   }
 
   public void updateFirstApartmentInTheList() {
     final Apartment apartment = realm.where(Apartment.class).findFirst();
-
-    realm.executeTransaction(new Realm.Transaction() {
-      @Override
-      public void execute(Realm realm) {
-        apartment.setRentValue(8000);
-      }
-    });
+    realm.beginTransaction();
+    apartment.setRentValue(8000);
+    realm.copyToRealmOrUpdate(apartment);
+    realm.commitTransaction();
   }
 
   public void deleteApartments() {
-    realm.executeTransaction(new Realm.Transaction() {
-      @Override
-      public void execute(Realm realm) {
-        realm.delete(Apartment.class);
-      }
-    });
+    realm.beginTransaction();
+    realm.delete(Apartment.class);
+    realm.commitTransaction();
   }
 
   public RealmResults<Apartment> fetchApartmentsBasedOnRentValue(int rentValue) {
@@ -71,4 +66,5 @@ public class Repository {
   public void closeDB() {
     realm.close();
   }
+
 }
