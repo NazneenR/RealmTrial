@@ -1,4 +1,10 @@
 <resources>
   <string name="app_name">RealmDemo</string>
   <string name="status_output">Status Output…</string>
+  <string name="add_property">Add Property</string>
+  <string name="rent_value">Rent Value</string>
+  <string name="owner_name">Owner Name</string>
+  <string name="complete_address">Complete Address</string>
+  <string name="locality">Locality</string>
+  <string name="save">Save</string>
 </resources>
