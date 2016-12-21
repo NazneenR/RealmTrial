@@ -59,8 +59,7 @@ public class Repository {
 
   public RealmResults<Apartment> executeComplexQuery() {
     return realm.where(Apartment.class)
-        .between("rentValue", 7700, 9900)
-        .beginsWith("location.name", "Hermes").findAll();
+        .between("rentValue", 7700, 9900).findAll();
   }
 
   public void closeDB() {
