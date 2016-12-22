@@ -25,5 +25,10 @@
         android:paddingTop="10sp"
         android:orientation="vertical"
         tools:context=".RealmIntroExample"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_property"
+        android:onClick="clickedAddProperty"/>
   </LinearLayout>
 </ScrollView>

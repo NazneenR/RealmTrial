@@ -6,4 +6,9 @@ import io.realm.annotations.PrimaryKey;
 public class Location extends RealmObject {
   @PrimaryKey
   public String name;
+
+  @Override
+  public String toString() {
+    return name;
+  }
 }

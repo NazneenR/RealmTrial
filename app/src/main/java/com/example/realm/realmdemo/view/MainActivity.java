@@ -1,9 +1,11 @@
 package com.example.realm.realmdemo.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -110,5 +112,10 @@ public class MainActivity extends AppCompatActivity {
     long diff = endTime - startTime;
     showStatus("\nSize of result set: " + results.size());
     showStatus("Complex link :- " + diff + " milliseconds");
+  }
+
+  public void clickedAddProperty(View view) {
+    Intent intent = new Intent(this, RentPropertyActivity.class);
+    startActivity(intent);
   }
 }
